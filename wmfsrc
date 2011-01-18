@@ -63,10 +63,14 @@
     # layout_button_width = x
 
     # Tiling layouts.
-    [layout] type = "tile_right"    symbol = "T"  [/layout]
-    [layout] type = "tile_bottom"   symbol = "B" [/layout]
-    [layout] type = "max"           symbol = "M" [/layout]
-    [layout] type = "free"          symbol = "F" [/layout]
+    #[layout] type = "tile_right"    symbol = "T"  [/layout]
+    #[layout] type = "tile_bottom"   symbol = "B" [/layout]
+    #[layout] type = "max"           symbol = "M" [/layout]
+    #[layout] type = "free"          symbol = "F" [/layout]
+    [layout] type = "tile_right"     symbol = "    \i[6;4;15;13;/home/thayer/.config/wmfs/icons/tr.png]\" [/layout]
+    [layout] type = "tile_bottom"    symbol = "    \i[6;4;15;13;/home/thayer/.config/wmfs/icons/tb.png]\" [/layout]
+    [layout] type = "max"            symbol = "    \i[6;4;15;13;/home/thayer/.config/wmfs/icons/max.png]\"[/layout]
+    [layout] type = "free"           symbol = "    \i[6;4;15;13;/home/thayer/.config/wmfs/icons/fr.png]\" [/layout]
 
 [/layouts]
 
