@@ -117,7 +117,7 @@
 
 [root]
     # Command you can execute to set the background.
-    background_command = "xsetroot -solid '#333333'"
+    background_command = "xsetroot -bg '#444' -fg '#222' -mod 2 2"
     background_command = 'killall conky; conky | while read -r; do wmfs -s -name "$REPLY"; done'
 [/root]
 
