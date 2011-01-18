@@ -1,0 +1,295 @@
+
+# file:     ~/.config/wmfs/wmfsrc                         
+
+[misc]
+    font                = "arial:bold:size=10" 
+    raisefocus          = false
+    focus_follow_mouse  = true
+    focus_pointer_click = true
+    status_timing       = 5     #seconds
+[/misc]
+
+[bar]
+    bg     = "#222222"
+    fg     = "#666666"
+    border = false
+
+    [systray]
+        # Enable/disable systray
+        active = true
+
+        # Screen of systray
+        screen = 5
+
+        # Spacing between tray icons
+        spacing = 1
+    [/systray]
+
+    # Remove this section to disable the selbar.
+    [selbar]
+        bg = "#222222"
+        fg = "#ffffff"
+
+        max_length = 30
+
+        [mouse] button = "2" func = "client_kill"  [/mouse]
+        [mouse] button = "3" func = "clientlist"  [/mouse]
+        [mouse] button = "4" func = "client_next" [/mouse]
+        [mouse] button = "5" func = "client_prev" [/mouse]
+    [/selbar]
+
+[/bar]
+
+[layouts]
+    fg = "#ffffff"
+    bg = "#222222"
+
+    # Border around the layout button.
+    border = true
+
+    # Value menu or switch.
+    system = "menu"
+
+    # Value left or right.
+    placement = "right"
+
+    # Keep layout geo for free layout
+    keep_layout_geo = false
+
+    # Symbol displayed for the selected layout in the list
+    selected_layout_symbol = "+"
+
+    # Width of layout button
+    # layout_button_width = x
+
+    # Tiling layouts.
+    [layout] type = "tile_right"    symbol = "T"  [/layout]
+    [layout] type = "tile_bottom"   symbol = "B" [/layout]
+    [layout] type = "max"           symbol = "M" [/layout]
+    [layout] type = "free"          symbol = "F" [/layout]
+
+[/layouts]
+
+[tags]
+    [default_tag]
+        name             = "new tag"
+        mwfact           = 0.5
+        nmaster          = 1
+        layout           = "max"
+        resizehint       = false
+        infobar_position = "top"
+    [/default_tag]
+
+    tag_round      = true
+    occupied_bg    = "#222222"
+    occupied_fg    = "#3399ff"
+    sel_fg         = "#ffffff"
+    sel_bg         = "#222222"
+    urgent_bg      = "#222222"
+    urgent_fg      = "#FF0000"
+    # If true, number of the tag will be used for name
+    name_count     = true
+
+    # Border around the tag buttons.
+    border      = true
+
+    # Hide empty tags in tag list
+    autohide    = false
+
+    # Mouse buttons action on tag.
+    mouse_button_tag_sel       = "1"
+    mouse_button_tag_transfert = "2"
+    mouse_button_tag_add       = "3"
+    mouse_button_tag_next      = "4"
+    mouse_button_tag_prev      = "5"
+
+    [tag] name = "1" [/tag]
+    [tag] name = "2" clients = {"firefox", "chromium"}[/tag]
+    [tag] name = "3" clients = {"nautilus"} [/tag]
+    [tag] name = "4" clients = {"gimp"} layout = "free" [/tag]
+    [tag] name = "5" [/tag]
+[/tags]
+
+[rules]
+       [rule] instance = "mplayer" free = "true" [/rule]
+       [rule] instance = "xcalc" free = "true" [/rule]
+[/rules]
+
+[root]
+    # Command you can execute to set the background.
+    background_command = "xsetroot -solid '#333333'"
+    background_command = 'killall conky; conky | while read -r; do wmfs -s -name "$REPLY"; done'
+[/root]
+
+[client]
+    client_round         = true
+    border_height        = 2
+    border_shadow        = false
+    border_normal        = "#222222"
+    border_focus         = "#3366ff"
+    resize_corner_normal = "#222222"
+    resize_corner_focus  = "#666666"
+
+    # Space between tiled clients
+    padding = 0
+[/client]
+
+[menu]
+    # Default menu, binded on the root window, button 3.
+    [set_menu]
+        name = "rootmenu"
+        # Available "center", "left", "right" menu align. Default: "center".
+        align = "left"
+
+        fg_focus  = "#899CA1" bg_focus  = "#121212"
+        fg_normal = "#888888" bg_normal = "#333333"
+
+        [item] name = "Terminal"        func = "spawn" cmd = "urxvtc" [/item]
+        [item] name = "Next tag"        func = "tag_next"                  [/item]
+        [item] name = "Previous tag"    func = "tag_prev"                  [/item]
+        [item] name = "Next layout"     func = "layout_next"               [/item]
+        [item] name = "Previous layout" func = "layout_prev"               [/item]
+        [item] name = "Toggle infobar"  func = "toggle_infobar_position"   [/item]
+        [item] name = "Quit WMFS"       func = "quit"                      [/item]
+    [/set_menu]
+
+    [set_menu]
+        name = "clientmenu"
+
+        fg_focus  = "#D4D4D4" bg_focus  = "#003366"
+        fg_normal = "#D4D4D4" bg_normal = "#191919"
+
+        # Check items: possible 'check_max' or 'check_free'.
+        [item] name = "Close"    func = "client_kill"                      [/item]
+        [item] name = "Maximize" func = "toggle_max"  check = "check_max"  [/item]
+        [item] name = "Free"     func = "toggle_free" check = "check_free" [/item]
+    [/set_menu]
+[/menu]
+
+[launcher]
+    [set_launcher]
+        # Limit size of the launcher window (px)
+        width_limit = 300
+
+        name = "launcher_exec"
+        prompt = "Exec: "
+        command = "exec"
+    [/set_launcher]
+
+    #ViWMFS : manage wmfs with vi-based command.
+    [set_launcher]
+        name = "viwmfs"
+        prompt = "> "
+        command = "wmfs -V"
+    [/set_launcher]
+[/launcher]
+
+[keys]
+
+    # Reload the configuration of wmfs.
+    [key] mod = {"Mod4"} key = "q" func = "reload" [/key]
+
+    # Quit wmfs.
+    [key] mod = {"Mod4", "Shift"} key = "q" func = "quit" [/key]
+
+    # Open a terminal.
+    [key] mod = {"Mod4", "Shift"} key = "Return" func = "spawn" cmd = "xterm" [/key]
+
+    # Kill the selected client.
+    [key] mod = {"Mod4", "Shift"} key = "c" func = "client_kill" [/key]
+
+    # Go to previously selected tag
+    [key] mod = {"Mod4"} key = "Tab" func = "tag_prev_sel" [/key]
+
+    # Swap current client with the next.
+    [key] mod = {"Alt"} key = "Tab" func = "client_swap_next" [/key]
+
+    # Swap current client with the previous.
+    [key] mod = {"Alt", "Shift"} key = "Tab" func = "client_swap_prev" [/key]
+
+    # Toggle maximum the selected client
+    [key] mod = {"Mod4"} key = "z" func = "toggle_max" [/key]
+
+    # Toggle free the selected client.
+    [key] mod = {"Mod4"} key = "f" func = "toggle_free" [/key]
+
+    # Toggle the position of the infobar.
+    [key] mod = {"Mod4"} key = "b" func = "toggle_infobar_position" [/key]
+
+    # Toggle the resizehint of the current tag/screen
+    [key] mod = {"Mod4", "Shift"} key = "r" func = "toggle_resizehint" [/key]
+
+    # Toggle the tag_autohide mode
+    [key] mod = {"Mod4", "Shift"} key = "t" func = "toggle_tagautohide" [/key]
+
+    # Select the next client.
+    [key] mod = {"Mod4"} key = "j" func = "client_next" [/key]
+
+    # Select the previous client.
+    [key] mod = {"Mod4"} key = "k" func = "client_prev" [/key]
+
+    # Select the next tag.
+    [key] mod = {"Mod4"} key = "Right" func = "tag_next" [/key]
+
+    # Select the previous tag.
+    [key] mod = {"Mod4"} key = "Left" func = "tag_prev" [/key]
+
+    # Select the next visible tag.
+    [key] mod = {"Mod4","Shift"} key = "Right" func = "tag_next_visible" [/key]
+
+    # Select the previous visible tag.
+    [key] mod = {"Mod4","Shift"} key = "Left" func = "tag_prev_visible" [/key]
+
+    # Set the next layout.
+    [key] mod = {"Mod4"} key = "space" func = "layout_next" [/key]
+
+    # Set the previous layout.
+    [key] mod = {"Mod4", "Shift"} key = "space" func = "layout_prev" [/key]
+
+    # Increase mwfact.
+    [key] mod = {"Mod4"} key = "l" func = "set_mwfact" cmd = "+0.025" [/key]
+
+    # Decrease mwfact.
+    [key] mod = {"Mod4"} key = "h" func = "set_mwfact" cmd = "-0.025" [/key]
+
+    #Launcher.
+    [key] mod = {"Mod4", "Shift"} key = "p" func = "launcher" cmd = "launcher_exec" [/key]
+
+    #ViWMFS
+    [key] mod = {"Mod4"} key = "Escape" func = "launcher" cmd = "viwmfs" [/key]
+
+    # Open
+    [key] mod = {"Mod4"} key = "p" func = "spawn" cmd = "gmrun" [/key]
+    [key] mod = {"Mod4"} key = "e" func = "spawn" cmd = "nautilus" [/key]
+    [key] mod = {"Mod4"} key = "w" func = "spawn" cmd = "firefox" [/key]
+    [key] mod = {"Mod4"} key = "c" func = "spawn" cmd = "xcalc" [/key]
+    [key] mod = {"Mod4"} key = "n" func = "spawn" cmd = "wicd-client -n" [/key]
+    [key] mod = {"Mod4"} key = "v" func = "spawn" cmd = "gnome-alsamixer" [/key]
+    [key] mod = {"Mod4"} key = "s" func = "spawn" cmd = "xterm -e bash -c 'screen -dRR -S $HOSTNAME'" [/key]
+    [key] mod = {"Control", "Alt"} key = "l" func = "spawn" cmd = "slock" [/key]
+    [key] mod = {"Control", "Alt"} key = "Delete" func = "spawn" cmd = "sudo shutdown -r now" [/key]
+    [key] mod = {"Control", "Alt"} key = "Insert" func = "spawn" cmd = "sudo shutdown -h now" [/key]
+
+    # Set the tag x.
+    [key] mod = {"Mod4"} key = "1" func = "tag" cmd = "1" [/key]
+    [key] mod = {"Mod4"} key = "2" func = "tag" cmd = "2" [/key]
+    [key] mod = {"Mod4"} key = "3" func = "tag" cmd = "3" [/key]
+    [key] mod = {"Mod4"} key = "4" func = "tag" cmd = "4" [/key]
+    [key] mod = {"Mod4"} key = "5" func = "tag" cmd = "5" [/key]
+
+    # Transfer selected client to x.
+    [key] mod = {"Mod4", "Shift"} key = "1" func = "tag_transfert" cmd ="1" [/key]
+    [key] mod = {"Mod4", "Shift"} key = "2" func = "tag_transfert" cmd ="2" [/key]
+    [key] mod = {"Mod4", "Shift"} key = "3" func = "tag_transfert" cmd ="3" [/key]
+    [key] mod = {"Mod4", "Shift"} key = "4" func = "tag_transfert" cmd ="4" [/key]
+    [key] mod = {"Mod4", "Shift"} key = "5" func = "tag_transfert" cmd ="5" [/key]
+
+    # Toggle additional tags (x) on the current tag
+    [key] mod = {"Mod4", "Alt"} key = "1" func = "tag_toggle_additional" cmd ="1" [/key]
+    [key] mod = {"Mod4", "Alt"} key = "2" func = "tag_toggle_additional" cmd ="2" [/key]
+    [key] mod = {"Mod4", "Alt"} key = "3" func = "tag_toggle_additional" cmd ="3" [/key]
+    [key] mod = {"Mod4", "Alt"} key = "4" func = "tag_toggle_additional" cmd ="4" [/key]
+    [key] mod = {"Mod4", "Alt"} key = "5" func = "tag_toggle_additional" cmd ="5" [/key]
+
+[/keys]
+
