@@ -1,0 +1,11 @@
+msi-wmfs
+========
+
+This repo contains configs and related items for my wmfs (window
+manager from scratch) setup under Arch Linux. Because I use a netbook,
+most applications are run in full screen (max) mode and I typically
+use at most five tags.
+
+wmfs homepage:      http://wmfs.info/projects/wmfs
+wmfs @ arch forums: https://bbs.archlinux.org/viewtopic.php?pid=870703
+wmfs @ arch wiki:   https://wiki.archlinux.org/index.php/WMFS
