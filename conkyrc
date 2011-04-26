@@ -15,7 +15,7 @@ use_spacer none
 # mail ${new_mails $HOME/mail/inbox}
 
 TEXT
-\\#999999\${acpitemp}°  \
+\\#999999\${hwmon temp 1}°  \
 \\#666666\${loadavg 1}  \
 \\#888888\${cpu cpu1}%   \\#aaaaaa\${freq_g 1}GHz      \
 \\#666666\${mem}      \
