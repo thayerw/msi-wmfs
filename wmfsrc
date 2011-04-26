@@ -46,6 +46,7 @@
 		# Cut title length
 		max_length = 30
 
+		[mouse] button = "1" func = "client_next" [/mouse]
 		[mouse] button = "2" func = "client_kill" [/mouse]
 		[mouse] button = "3" func = "clientlist"  [/mouse]
 		[mouse] button = "4" func = "client_next" [/mouse]
@@ -93,7 +94,7 @@
 		name             = "new tag"
 		mwfact           = 0.5
 		nmaster          = 1
-		layout           = "max"
+		layout           = "tile_bottom"
 		resizehint       = false
 		infobar_position = "top"
 	[/default_tag]
@@ -146,7 +147,7 @@
 
 [root]
 	# Command you can execute to set the background.
-	background_command = 'xsetroot -bg \#666 -fg \#222 -mod 2 2'
+	#background_command = 'xsetroot -bg \#666 -fg \#222 -mod 2 2'
 	background_command = 'killall conky; conky -c $XDG_CONFIG_HOME/wmfs/conkyrc | while read -r; do wmfs -s -name "$REPLY"; done'
 
 	[mouse] button = "4" func = "tag_next"              [/mouse]
@@ -224,8 +225,8 @@
 		fg_focus  = "#191919" bg_focus  = "#7E89A2"
 		fg_normal = "#9F9AB3" bg_normal = "#191919"
 
-		[item] name = "Browser"         func = "spawn" cmd = "chromium"    [/item]
-		[item] name = "Calculator"      func = "spawn" cmd = "xcalc"       [/item]
+		[item] name = "Browser"         func = "spawn" cmd = "google-chrome"    [/item]
+		[item] name = "Calculator"      func = "spawn" cmd = "xcalc"            [/item]
 	[/set_menu]
 
 
@@ -343,12 +344,12 @@
 	# Open
 	[key] mod = {"Mod4"} key = "p" func = "spawn" cmd = "gmrun" [/key]
 	[key] mod = {"Mod4"} key = "e" func = "spawn" cmd = "nautilus" [/key]
-	[key] mod = {"Mod4"} key = "w" func = "spawn" cmd = "chromium" [/key]
+	[key] mod = {"Mod4"} key = "w" func = "spawn" cmd = "google-chrome" [/key]
 	[key] mod = {"Mod4"} key = "c" func = "spawn" cmd = "xcalc" [/key]
 	[key] mod = {"Mod4"} key = "n" func = "spawn" cmd = "wicd-client -n" [/key]
 	[key] mod = {"Mod4"} key = "v" func = "spawn" cmd = "alsamixer" [/key]
 	[key] mod = {"Mod4"} key = "s" func = "spawn" cmd = "urxvtcd -e bash -c 'screen -dRR -S $HOSTNAME'" [/key]
-	[key] mod = {"Control", "Alt"} key = "l" func = "spawn" cmd = "slock" [/key]
+	[key] mod = {"Control", "Alt"} key = "l" func = "spawn" cmd = "gnome-screensaver-command --lock" [/key]
 	[key] mod = {"Control", "Alt"} key = "Delete" func = "spawn" cmd = "sudo shutdown -r now" [/key]
 	[key] mod = {"Control", "Alt"} key = "Insert" func = "spawn" cmd = "sudo shutdown -h now" [/key]
 
