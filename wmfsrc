@@ -5,7 +5,6 @@
 [misc]
 	font                  = "arial:bold:size=10" 
 	raisefocus            = true
-	#raiseswitch           = false	# DEPRECATED?
 	focus_follow_mouse    = true
 	focus_follow_movement = false
 	opacity               = 255
@@ -22,20 +21,23 @@
 	fg     = "#777777"
 	bg     = "#222222"
 	border = false
-	#height = "-1"
+	height = "-1"
 
 	light_shade =  0.10
 	dark_shade  = -0.10
+
+	[mouse] button = "4" func = "tag_next" [/mouse]
+	[mouse] button = "5" func = "tag_prev" [/mouse]
 
 	[systray]
 		# Enable/disable systray
 		active = true
 
 		# Screen of systray
-		screen = 5
+		screen = 0
 
 		# Spacing between tray icons
-		spacing = 2
+		spacing = 1
 	[/systray]
 
 	# Remove this section to disable the selbar.
@@ -44,7 +46,7 @@
 		bg = "#222222"
 
 		# Cut title length
-		max_length = 30
+		max_length = 20
 
 		[mouse] button = "1" func = "client_next" [/mouse]
 		[mouse] button = "2" func = "client_kill" [/mouse]
@@ -134,15 +136,20 @@
 
 	# clients option is *DEPRECATED* but works, see [rules] section
 	[tag] name = "1" [/tag]
-	[tag] name = "2" clients = {"firefox", "chromium", "google-chrome"}[/tag]
-	[tag] name = "3" clients = {"nautilus"} [/tag]
-	[tag] name = "4" clients = {"gimp"} layout = "free" [/tag]
+	[tag] name = "2" [/tag]
+	[tag] name = "3" [/tag]
+	[tag] name = "4" [/tag]
 	[tag] name = "5" [/tag]
 [/tags]
 
 [rules]
+	[rule] instance = "chromium"        tag = "2"     [/rule]
+	[rule] instance = "firefox"         tag = "2"     [/rule]
+	[rule] instance = "google-chrome"   tag = "2"     [/rule]
 	[rule] instance = "mplayer"         free = "true" [/rule]
 	[rule] instance = "xcalc"           free = "true" [/rule]
+	[rule] instance = "nautilus"        tag = "3"     [/rule]
+	[rule] instance = "gimp-2.6"  tag = "4" free = "true" [/rule]
 [/rules]
 
 [root]
@@ -166,7 +173,8 @@
 	resize_corner_normal = "#222222"
 	resize_corner_focus  = "#666666"
 	set_new_win_master   = true
-	client_tile_raise    = true
+	# raise client when focused; problematic for floating clients
+	client_tile_raise    = false
 	new_client_get_mouse = false
 
 	# send all client that have no tag rule in this default tag
@@ -208,7 +216,7 @@
 		fg_focus  = "#899CA1" bg_focus  = "#121212"
 		fg_normal = "#888888" bg_normal = "#333333"
 
-		[item] name = "Terminal"        func = "spawn" cmd = "urxvtc || urxvt || xterm || gnome-terminal" [/item]
+		[item] name = "Terminal"        func = "spawn" cmd = "urxvtcd || urxvtc || urxvt || xterm || gnome-terminal" [/item]
 		[item] name = "Applications" submenu = "appmenu"                   [/item]
 		[item] name = "Next tag"        func = "tag_next"                  [/item]
 		[item] name = "Previous tag"    func = "tag_prev"                  [/item]
@@ -225,7 +233,7 @@
 		fg_focus  = "#191919" bg_focus  = "#7E89A2"
 		fg_normal = "#9F9AB3" bg_normal = "#191919"
 
-		[item] name = "Browser"         func = "spawn" cmd = "google-chrome"    [/item]
+		[item] name = "Browser"         func = "spawn" cmd = "chromium"    [/item]
 		[item] name = "Calculator"      func = "spawn" cmd = "xcalc"            [/item]
 	[/set_menu]
 
@@ -253,6 +261,15 @@
 		command = "exec"
 	[/set_launcher]
 
+	[set_launcher]
+		# Limit size of the launcher window (px)
+		width_limit = 300
+
+		name = "launcher_man"
+		prompt = "Man: "
+		command = "exec xterm -e man"
+	[/set_launcher]
+
 	#ViWMFS : manage wmfs with vi-based command.
 	[set_launcher]
 		name = "viwmfs"
@@ -262,6 +279,8 @@
 [/launcher]
 
 [keys]
+
+	[key] mod = {"Mod4"} key = "m" func = "launcher" cmd = "launcher_man" [/key]
 
 	# Reload the configuration of wmfs.
 	[key] mod = {"Mod4"} key = "q" func = "reload" [/key]
@@ -344,7 +363,7 @@
 	# Open
 	[key] mod = {"Mod4"} key = "p" func = "spawn" cmd = "gmrun" [/key]
 	[key] mod = {"Mod4"} key = "e" func = "spawn" cmd = "nautilus" [/key]
-	[key] mod = {"Mod4"} key = "w" func = "spawn" cmd = "google-chrome" [/key]
+	[key] mod = {"Mod4"} key = "w" func = "spawn" cmd = "chromium" [/key]
 	[key] mod = {"Mod4"} key = "c" func = "spawn" cmd = "xcalc" [/key]
 	[key] mod = {"Mod4"} key = "n" func = "spawn" cmd = "wicd-client -n" [/key]
 	[key] mod = {"Mod4"} key = "v" func = "spawn" cmd = "alsamixer" [/key]
